@@ -14,7 +14,8 @@ export const StringComponent: React.FC = () => {
     const [endIdx, setEndIdx] = React.useState<number | null>();
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(Array.from(e.target.value))
+        setValue(Array.from(e.target.value));
+        //setFlag(false);
     }
 
     const swap = (arr: string[], firstIdx: number, secondIdx: number): void => {
@@ -73,17 +74,14 @@ export const StringComponent: React.FC = () => {
         setPerforming(true);
         setTimeout(() => swapString(), 1000);
     }
-    console.log(performing)
 
     return (
         <SolutionLayout title="Строка">
             <div className={stringStyle.mainBox}>
                 <form className={stringStyle.form} onSubmit={e => onSubmitHandler(e)}>
-                    <Input isLimitText={true} maxLength={11} onInput={onChangeInput}/>
-                    {(value.length > 11 || value.length < 1) ?
-                        <Button text={'Развернуть'} type={'submit'} disabled={true}/> :
-                        <Button text={"Развернуть"} type={"submit"} id="button"
-                                isLoader={performing}/>}
+                    <Input isLimitText={true} maxLength={11} onChange={onChangeInput}/>
+                    <Button text={'Развернуть'} type={'submit'}
+                            disabled={(value.length > 11 || value.length < 1)} isLoader={performing}/>
                 </form>
                 <div className={stringStyle.box}>
                     {flag ? value && value.map((item, idx) => performing && (startIdx === idx || endIdx === idx) ?
