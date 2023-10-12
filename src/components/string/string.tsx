@@ -4,54 +4,94 @@ import {Input} from "../ui/input/input";
 import stringStyle from './string.module.css';
 import {Button} from "../ui/button/button";
 import {Circle} from "../ui/circle/circle";
+import {ElementStates} from "../../types/element-states";
 
 export const StringComponent: React.FC = () => {
-    const [value, setValue] = useState<string>('');
-    const [a, setA] = useState<Array<string>>();
+    const [value, setValue] = useState<Array<string>>([]);
+    const [performing, setPerforming] = React.useState<boolean>();
+    const [flag, setFlag] = useState<boolean>(false);
+    const [startIdx, setStartIdx] = React.useState<number | null>();
+    const [endIdx, setEndIdx] = React.useState<number | null>();
 
-    const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value)
+    const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(Array.from(e.target.value))
     }
 
-    const swap = (arr: string[], firstIndex: number, secondIndex: number): void => {
-        const tmp = arr[firstIndex];
-        arr[firstIndex] = arr[secondIndex];
-        arr[secondIndex] = tmp;
+    const swap = (arr: string[], firstIdx: number, secondIdx: number): void => {
+        const tmp = arr[firstIdx];
+        arr[firstIdx] = arr[secondIdx];
+        arr[secondIdx] = tmp;
     };
 
-    const swapString = (str: string) => {
-        let arr = Array.from(str)
+    const swapString = () => {
         let start = 0;
-        let end = arr.length - 1;
+        let end = value.length - 1;
         const mid = Math.floor((start + end) / 2)
-
         for (let i = 0; i <= mid; i++) {
-            swap(arr, end, start)
-            start++;
-            end--;
+            setTimeout(() => {
+                swap(value, end, start);
+                setStartIdx(start);
+                setEndIdx(end);
+                setPerforming(true);
+                start++;
+                end--;
+            }, 1000 * i)
         }
-        setA(arr)
+        setTimeout(() => {
+            setPerforming(false);
+            setStartIdx(null);
+            setEndIdx(null);
+        }, (1000 * mid) + 1000)
     }
 
-    console.log(a)
+    // const swapString = async () => {
+    //     await new Promise<void>((resolve) => {
+    //         let start = 0;
+    //         let end = value!.length - 1;
+    //         const mid = Math.floor((start + end) / 2);
+    //         setInitial(false);
+    //         for (let i = 0; i <= mid; i++) {
+    //             setTimeout(() => {
+    //                 swap(value!, end, start);
+    //                 setStartIdx(start);
+    //                 setEndIdx(end);
+    //                 setPerforming(true);
+    //                 start++;
+    //                 end--;
+    //             }, 1000 * i);
+    //         }
+    //         setTimeout(() => resolve(), 1000 * mid)
+    //     });
+    //     setPerforming(false);
+    //     setStartIdx(null);
+    //     setEndIdx(null);}
+
 
     const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        swapString(value)
+        setFlag(true);
+        setPerforming(true);
+        setTimeout(() => swapString(), 1000);
     }
-
+    console.log(performing)
 
     return (
         <SolutionLayout title="Строка">
             <div className={stringStyle.mainBox}>
                 <form className={stringStyle.form} onSubmit={e => onSubmitHandler(e)}>
-                    <Input isLimitText={true} maxLength={11} value={value} onChange={onChangeText}/>
-                    <Button text={'Развернуть'} type={'submit'}/>
+                    <Input isLimitText={true} maxLength={11} onInput={onChangeInput}/>
+                    {(value.length > 11 || value.length < 1) ?
+                        <Button text={'Развернуть'} type={'submit'} disabled={true}/> :
+                        <Button text={"Развернуть"} type={"submit"} id="button"
+                                isLoader={performing}/>}
                 </form>
                 <div className={stringStyle.box}>
-                    {a && a.map((item, idx) =>
-                        <Circle letter={item} key={idx}/>
-                    )}
+                    {flag ? value && value.map((item, idx) => performing && (startIdx === idx || endIdx === idx) ?
+                        <Circle letter={item} key={idx} state={ElementStates.Changing}/> :
+                        (startIdx! >= idx || endIdx! <= idx) || !performing ?
+                            < Circle letter={item} key={idx} state={ElementStates.Modified}/> :
+                            <Circle letter={item} state={ElementStates.Default} key={idx}/>
+                    ) : ''}
                 </div>
             </div>
         </SolutionLayout>
