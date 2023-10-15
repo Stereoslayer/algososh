@@ -36,8 +36,8 @@ const getInitArr = (): IListArrayItem[] => {
 
 export const ListPage: React.FC = () => {
     const [linkedListArray, setLinkedListArray] = useState<Array<IListArrayItem>>([]);
-    const [inputValue, setInputValue] = useState<string>();
-    const [indexValue, setIndexValue] = useState<string>();
+    const [inputValue, setInputValue] = useState<string>('');
+    const [indexValue, setIndexValue] = useState<string>('');
     const [addHeadLoading, setAddHeadLoading] = useState<boolean>(false);
     const [deleteHeadLoading, setDeleteHeadLoading] = useState<boolean>(false);
     const [addTailLoading, setAddTailLoading] = useState<boolean>(false);
@@ -186,7 +186,7 @@ export const ListPage: React.FC = () => {
         }, DELAY_IN_MS)
     }
 
-    const addBuIndex = () => {
+    const addBuIndex = async () => {
         setAddByIndexLoading(true)
         const arr = linkedList.toArray();
         const idx = Number(indexValue);
@@ -196,77 +196,76 @@ export const ListPage: React.FC = () => {
             head: linkedList.head ? null : 'head',
             tail: linkedList.tail ? null : 'tail'
         }
-        setTimeout(() => {
 
-            linkedList.addByIndex(newArrItem, idx)
+        linkedList.addByIndex(newArrItem, idx)
 
-            for (let i = 0; i <= idx; i++) {
-                let tmp = arr[i].head;
-                arr[i] = {...arr[i], head: <Circle letter={inputValue} state={ElementStates.Changing} isSmall={true}/>}
-                if (i > 0) {
-                    arr[0].head = 'head'
-                    arr[i - 1] = {...arr[i - 1], state: ElementStates.Changing, head: tmp}
-                }
+        for (let i = 0; i <= idx; i++) {
+            let tmp = arr[i].head;
+            arr[i] = {...arr[i], head: <Circle letter={inputValue} state={ElementStates.Changing} isSmall={true}/>}
+            if (i > 0) {
+                arr[0].head = 'head'
+                arr[i - 1] = {...arr[i - 1], state: ElementStates.Changing, head: tmp}
             }
-            setLinkedListArray([...arr])
-        }, SHORT_DELAY_IN_MS)
 
-        setTimeout(() => {
-            arr[idx].head = linkedList.head ? null : 'head';
-
-            for (let i = 0; i < idx; i++) {
-                arr[i].state = ElementStates.Default
-            }
-            arr.splice(idx, 0, {
-                value: inputValue!,
-                state: ElementStates.Modified,
-                head: linkedList.head ? null : 'head',
-                tail: linkedList.tail ? null : 'tail'
-            })
             setLinkedListArray([...arr])
-        }, DELAY_IN_MS)
+            await (new Promise((resolve) => setTimeout(resolve, SHORT_DELAY_IN_MS)));
+        }
 
-        setTimeout(() => {
-            arr[idx].state = ElementStates.Default;
-            arr[0].head = 'head';
-            setLinkedListArray([...arr])
-            setAddByIndexLoading(false)
-        }, DELAY_IN_MS + 500)
+
+        arr[idx].head = linkedList.head ? null : 'head';
+
+        for (let i = 0; i < idx; i++) {
+            arr[i].state = ElementStates.Default
+        }
+        arr.splice(idx, 0, {
+            value: inputValue!,
+            state: ElementStates.Modified,
+            head: linkedList.head ? null : 'head',
+            tail: linkedList.tail ? null : 'tail'
+        })
+        setLinkedListArray([...arr])
+        await (new Promise((resolve) => setTimeout(resolve, SHORT_DELAY_IN_MS)));
+
+
+        arr[idx].state = ElementStates.Default;
+        arr[0].head = 'head';
+        setLinkedListArray([...arr])
+        setAddByIndexLoading(false)
 
     }
 
-    const deleteByIndex = () => {
+    const deleteByIndex = async () => {
         setDeleteByIndexLoading(true)
         const arr = linkedList.toArray()
         const idx = Number(indexValue);
-        setTimeout(() => {
-            linkedList.deleteByIndex(idx);
-            for (let i = 0; i <= idx; i++) {
-                arr[i].state = ElementStates.Changing
-                setLinkedListArray([...arr])
-            }
-        }, SHORT_DELAY_IN_MS)
 
-        setTimeout(() => {
-            arr[idx] = {
-                ...arr[idx],
-                tail: <Circle letter={arr[idx].value} state={ElementStates.Changing} isSmall={true}/>,
-                value: '',
-                state: ElementStates.Default
-            }
+        linkedList.deleteByIndex(idx);
+        for (let i = 0; i <= idx; i++) {
+            arr[i].state = ElementStates.Changing
             setLinkedListArray([...arr])
-        }, DELAY_IN_MS)
+            await (new Promise((resolve) => setTimeout(resolve, SHORT_DELAY_IN_MS)));
+        }
 
-        setTimeout(() => {
-            arr.splice(idx, 1)
-            arr.forEach((item) => item.state = ElementStates.Default)
-            setLinkedListArray([...arr])
-            setDeleteByIndexLoading(false)
-        }, DELAY_IN_MS + 500)
+
+        arr[idx] = {
+            ...arr[idx],
+            tail: <Circle letter={arr[idx].value} state={ElementStates.Changing} isSmall={true}/>,
+            value: '',
+            state: ElementStates.Default
+        }
+        setLinkedListArray([...arr])
+        await (new Promise((resolve) => setTimeout(resolve, SHORT_DELAY_IN_MS)));
+
+
+        arr.splice(idx, 1)
+        arr.forEach((item) => item.state = ElementStates.Default)
+        setLinkedListArray([...arr])
+        setDeleteByIndexLoading(false)
+
     }
 
     const loading: boolean = addHeadLoading || deleteHeadLoading || addTailLoading || deleteTailLoading || addByIndexLoading || deleteByIndexLoading;
-    const indexButtonsDisable = indexValue === undefined || Number(indexValue) < 0 || inputValue === '' || indexValue === '' || Number(indexValue) >= linkedList.getSize() || loading;
+    const indexButtonsDisable = indexValue === undefined || Number(indexValue) < 0 || Number(indexValue) >= linkedList.getSize() || loading;
     const buttonsDisable = inputValue === undefined || Number(inputValue) < 1 || loading;
 
     return (
@@ -274,7 +273,7 @@ export const ListPage: React.FC = () => {
             <div className={listStyle.mainBox}>
                 <form className={listStyle.form}>
                     <Input extraClass={listStyle.input} type="text" isLimitText={true} placeholder="Введите значение"
-                           maxLength={maxInputLength} onChange={onChangeInputValue}
+                           maxLength={maxInputLength} onChange={onChangeInputValue} value={inputValue}
                            disabled={loading}/>
                     <Button text="Добавить в head" linkedList="small" onClick={headAdd} isLoader={addHeadLoading}
                             disabled={buttonsDisable}/>
@@ -282,17 +281,18 @@ export const ListPage: React.FC = () => {
                             onClick={addTail} isLoader={addTailLoading}
                             disabled={buttonsDisable}/>
                     <Button text="Удалить из head" linkedList="small" onClick={headDelete}
-                            isLoader={deleteHeadLoading} disabled={loading}/>
-                    <Button text="Удалить из tail" linkedList="small" disabled={loading} isLoader={deleteTailLoading}
+                            isLoader={deleteHeadLoading} disabled={loading || linkedListArray.length === 0}/>
+                    <Button text="Удалить из tail" linkedList="small" disabled={loading || linkedListArray.length === 0}
+                            isLoader={deleteTailLoading}
                             onClick={tailDelete}/>
                     <Input extraClass={listStyle.input} type="number" placeholder="Введите индекс"
-                           onChange={onChangeInputIndex}/>
+                           onChange={onChangeInputIndex} value={indexValue}/>
                     <Button text="Добавить по индексу" linkedList="big" onClick={addBuIndex}
                             isLoader={addByIndexLoading}
-                            disabled={indexButtonsDisable}/>
+                            disabled={indexButtonsDisable || inputValue === '' || indexValue === ''}/>
                     <Button text="Удалить по индексу" linkedList="big" isLoader={deleteByIndexLoading}
                             onClick={deleteByIndex}
-                            disabled={indexButtonsDisable}/>
+                            disabled={indexButtonsDisable || indexValue === ''}/>
                 </form>
                 <div className={listStyle.resultBox}>
                     {linkedListArray.map((item, idx) =>

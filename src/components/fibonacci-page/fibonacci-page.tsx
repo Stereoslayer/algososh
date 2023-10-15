@@ -9,17 +9,17 @@ import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 
 export const FibonacciPage: React.FC = () => {
     const maxNumber = 19;
-    const [value, setValue] = useState<number>();
+    const [value, setValue] = useState<string>('');
     const [loading, setLoading] = useState<boolean>();
     const [fibonacciSequence, setFibonacciSequence] = useState<Array<number>>([]);
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(Number(e.target.value));
+        setValue(e.target.value);
     }
     const calcFibonacci = () => {
         setLoading(true);
         const fibArr: Array<number> = [];
-        for (let i = 0; i <= value!; i++) {
+        for (let i = 0; i <= Number(value); i++) {
             setTimeout(() => {
                 if (i === 0 || i === 1) {
                     fibArr.push(1);
@@ -31,7 +31,7 @@ export const FibonacciPage: React.FC = () => {
             }, SHORT_DELAY_IN_MS * i);
             setTimeout(() => {
                 setLoading(false);
-            }, SHORT_DELAY_IN_MS * (value!));
+            }, SHORT_DELAY_IN_MS * (Number(value)));
         }
     }
     const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -44,9 +44,10 @@ export const FibonacciPage: React.FC = () => {
             <div className={fibonacciStyle.mainBox}>
                 <form className={fibonacciStyle.form} onSubmit={e => onSubmitHandler(e)}>
                     <Input type={'number'} isLimitText={true} max={maxNumber} onChange={onChangeHandler}
-                           disabled={loading}/>
+                           disabled={loading} value={value}/>
                     <Button text={'Рассчитать'} type={'submit'}
-                            disabled={value === undefined || value > maxNumber || value < 1} isLoader={loading}/>
+                            disabled={value === undefined || Number(value) > maxNumber || Number(value) < 1}
+                            isLoader={loading}/>
                 </form>
                 <div className={fibonacciStyle.resultBox}>
                     {fibonacciSequence.length !== 0 ? fibonacciSequence.map((item, idx) =>

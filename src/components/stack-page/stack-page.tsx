@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useMemo, useState} from "react";
+import React, {ChangeEvent, FormEvent, useMemo, useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
@@ -17,7 +17,7 @@ interface IStackItem {
 
 export const StackPage: React.FC = () => {
     const [stackArray, setStackArray] = useState<IStackItem[]>([]);
-    const [inputValue, setInputValue] = useState<string>();
+    const [inputValue, setInputValue] = useState<string>('');
     const [addLoading, setAddLoading] = useState<boolean>(false);
     const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
 
@@ -66,10 +66,15 @@ export const StackPage: React.FC = () => {
         setStackArray([]);
     }
 
+    // const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     addItem();
+    // }
+
     return (
         <SolutionLayout title="Стек">
             <div className={stackStyle.mainBox}>
-                <form className={stackStyle.form}>
+                <form className={stackStyle.form} onSubmit={e => e.preventDefault()}>
                     <Input extraClass={stackStyle.input} isLimitText={true} maxLength={maxInputLength}
                            onChange={onChangeInput} disabled={addLoading || deleteLoading} value={inputValue}/>
                     <Button text="Добавить" isLoader={addLoading} onClick={addItem}

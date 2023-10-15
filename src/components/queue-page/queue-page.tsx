@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useMemo, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useMemo, useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
@@ -20,13 +20,14 @@ interface IQueueArrItem {
 
 export const QueuePage: React.FC = () => {
     const [queueArray, setQueueArray] = useState<IQueueArrItem[]>([]);
-    const [inputValue, setInputValue] = useState<string>();
+    const [inputValue, setInputValue] = useState<string>('');
     const [addLoading, setAddLoading] = useState<boolean>(false);
     const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
     }
+    console.log(inputValue)
 
     const queue = useMemo(() => new Queue<string>(queueMaxArrLength), [])
 
@@ -131,12 +132,18 @@ export const QueuePage: React.FC = () => {
         renderInitialArray();
     };
 
+    // const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     enqueue();
+    // }
+
+
     const disableButtons = addLoading || deleteLoading;
 
     return (
         <SolutionLayout title="Очередь">
             <div className={queueStyle.mainBox}>
-                <form className={queueStyle.form}>
+                <form className={queueStyle.form} onSubmit={e => e.preventDefault()}>
                     <Input extraClass={queueStyle.input} isLimitText={true} maxLength={maxValueLength}
                            onChange={onChangeInput} disabled={addLoading} value={inputValue}/>
                     <Button text="Добавить" onClick={enqueue} isLoader={addLoading}

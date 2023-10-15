@@ -62,7 +62,8 @@ export const StringComponent: React.FC = () => {
         <SolutionLayout title="Строка">
             <div className={stringStyle.mainBox}>
                 <form className={stringStyle.form} onSubmit={e => onSubmitHandler(e)}>
-                    <Input isLimitText={true} maxLength={11} onChange={onChangeInput} disabled={loading}/>
+                    <Input isLimitText={true} maxLength={11} onChange={onChangeInput} disabled={loading}
+                           value={inputValue}/>
                     <Button text={'Развернуть'} type={'submit'}
                             disabled={(inputValue!.length > 11 || inputValue!.length < 1)} isLoader={loading}/>
                 </form>
