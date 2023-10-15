@@ -1,0 +1,36 @@
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 8px;
+    margin: 0 auto;
+}
+
+.resultBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 16px;
+    align-items: end;
+    min-height: 320px;
+}
+
+.mainBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 60px;
+}
+
+.radioFieldset {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+}
+
+.buttonsFieldset {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+}

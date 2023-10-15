@@ -1,0 +1,32 @@
+.mainBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 120px;
+}
+
+.form {
+    max-width: 952px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 auto;
+}
+
+.input {
+    width: 204px;
+}
+
+.resultBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 16px;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 16px;
+}

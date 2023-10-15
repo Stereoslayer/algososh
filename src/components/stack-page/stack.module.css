@@ -1,6 +1,8 @@
+.input {
+    width: 377px;
+}
 
 .form {
-    width: 522px;
     display: flex;
     flex-direction: row;
     column-gap: 8px;
