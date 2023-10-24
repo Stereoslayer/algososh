@@ -1,0 +1,21 @@
+
+.form {
+    width: 522px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+    margin: 0 auto;
+}
+
+.resultBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 16px;
+}
+
+.mainBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 120px;
+}

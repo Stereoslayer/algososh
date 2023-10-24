@@ -8,21 +8,21 @@ import { StringComponent } from "../string/string";
 import { SortingPage } from "../sorting-page/sorting-page";
 import { StackPage } from "../stack-page/stack-page";
 
-import "./app.css";
+import appStyle from "./app.module.css";
 
 function App() {
   return (
-    <div className="app">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact>
-            <MainPage />
-          </Route>
-          <Route path="/recursion">
-            <StringComponent />
-          </Route>
-          <Route path="/fibonacci">
-            <FibonacciPage />
+      <div className={appStyle.app}>
+          <BrowserRouter>
+              <Switch>
+                  <Route path="/" exact>
+                      <MainPage/>
+                  </Route>
+                  <Route path="/recursion">
+                      <StringComponent/>
+                  </Route>
+                  <Route path="/fibonacci">
+                      <FibonacciPage/>
           </Route>
           <Route path="/sorting">
             <SortingPage />
