@@ -62,12 +62,12 @@ export const StringComponent: React.FC = () => {
         <SolutionLayout title="Строка">
             <div className={stringStyle.mainBox}>
                 <form className={stringStyle.form} onSubmit={e => onSubmitHandler(e)}>
-                    <Input isLimitText={true} maxLength={11} onChange={onChangeInput} disabled={loading}
+                    <Input isLimitText={true} maxLength={11} onChange={onChangeInput} disabled={loading} id={'input'}
                            value={inputValue}/>
-                    <Button text={'Развернуть'} type={'submit'}
+                    <Button text={'Развернуть'} type={'submit'} data-testid={'button'} id={'button'}
                             disabled={(inputValue!.length > 11 || inputValue!.length < 1)} isLoader={loading}/>
                 </form>
-                <div className={stringStyle.resultBox}>
+                <div className={stringStyle.resultBox} data-testid={'res'}>
                     {value.map((item, idx) =>
                         <Circle letter={item.value} key={idx} state={item.state}/>)}
                 </div>

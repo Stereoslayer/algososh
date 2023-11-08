@@ -9,7 +9,9 @@ import {generateRandomArray} from "../../services/utils/random-numbers";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {Column} from "../ui/column/column";
 
-
+type TSortingPageProps = {
+    initValue?: ISortingArrayItem[];
+};
 interface ISortingArrayItem {
     idx: number,
     state?: ElementStates
@@ -29,7 +31,7 @@ const minLength = 3;
 const maxLength = 17;
 const maxValue = 100;
 
-export const SortingPage: React.FC = () => {
+export const SortingPage: React.FC<TSortingPageProps> = ({initValue}) => {
     const getArr = () => {
         const arr: Array<number> = generateRandomArray(maxLength, minLength, maxValue);
         return arr.map((item, idx) => {
@@ -41,7 +43,7 @@ export const SortingPage: React.FC = () => {
     }
 
     const [sortingState, setSortingState] = useState<ISortingState>({
-        array: getArr(),
+        array: initValue ? initValue! : getArr(),
         way: SortingWays.Selection
     });
     const [loading, setLoading] = useState('');
@@ -174,7 +176,7 @@ export const SortingPage: React.FC = () => {
                                 disabled={loading === Direction.Descending || loading === Direction.Ascending}/>
                     </fieldset>
                 </form>
-                <div className={sortingStyle.resultBox}>
+                <div className={sortingStyle.resultBox} data-testid={'res'}>
                     {sortingState.array.map((item, idx) => <Column key={idx} index={item.idx} state={item.state}/>)}
                 </div>
             </div>
