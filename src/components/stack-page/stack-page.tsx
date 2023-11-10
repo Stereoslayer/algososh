@@ -76,15 +76,16 @@ export const StackPage: React.FC = () => {
             <div className={stackStyle.mainBox}>
                 <form className={stackStyle.form} onSubmit={e => e.preventDefault()}>
                     <Input extraClass={stackStyle.input} isLimitText={true} maxLength={maxInputLength}
-                           onChange={onChangeInput} disabled={addLoading || deleteLoading} value={inputValue}/>
+                           onChange={onChangeInput} disabled={addLoading || deleteLoading} value={inputValue}
+                           id={'input'}/>
                     <Button text="Добавить" isLoader={addLoading} onClick={addItem}
-                            disabled={inputValue === '' || inputValue === undefined}/>
+                            disabled={inputValue === '' || inputValue === undefined} id={'button'}/>
                     <Button text="Удалить" isLoader={deleteLoading} onClick={deleteItem}
-                            disabled={stackArray.length === 0 || addLoading}/>
+                            disabled={stackArray.length === 0 || addLoading} id={'buttonDelete'}/>
                     <Button text="Очистить" extraClass={'ml-30'} onClick={clear}
-                            disabled={stackArray.length === 0 || addLoading || deleteLoading}/>
+                            disabled={stackArray.length === 0 || addLoading || deleteLoading} id={'buttonClear'}/>
                 </form>
-                <div className={stackStyle.resultBox}>
+                <div className={stackStyle.resultBox} id={'res'}>
                     {stackArray.map((item, idx) =>
                         <Circle letter={item.value!} state={item.state} index={idx}
                                 head={stackArray.length - 1 === idx ? 'top' : ''} key={idx}/>)}

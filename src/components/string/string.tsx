@@ -27,9 +27,9 @@ export const StringComponent: React.FC = () => {
     };
 
     const swapString = (arr: TLetter[]) => {
-        const mid = Math.floor(arr.length / 2)
+        const mid = Math.ceil(arr.length / 2)
         setValue([...arr]);
-        for (let i = 0; i <= mid; i++) {
+        for (let i = 0; i < mid; i++) {
             setTimeout(() => {
                 let start = i;
                 let end = arr.length - 1 - i;

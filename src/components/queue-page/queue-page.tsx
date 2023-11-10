@@ -27,7 +27,6 @@ export const QueuePage: React.FC = () => {
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
     }
-    console.log(inputValue)
 
     const queue = useMemo(() => new Queue<string>(queueMaxArrLength), [])
 
@@ -145,15 +144,15 @@ export const QueuePage: React.FC = () => {
             <div className={queueStyle.mainBox}>
                 <form className={queueStyle.form} onSubmit={e => e.preventDefault()}>
                     <Input extraClass={queueStyle.input} isLimitText={true} maxLength={maxValueLength}
-                           onChange={onChangeInput} disabled={addLoading} value={inputValue}/>
+                           onChange={onChangeInput} disabled={addLoading} value={inputValue} id={'input'}/>
                     <Button text="Добавить" onClick={enqueue} isLoader={addLoading}
-                            disabled={disableButtons || inputValue === '' || inputValue === undefined}/>
+                            disabled={disableButtons || inputValue === '' || inputValue === undefined} id={'button'}/>
                     <Button text="Удалить" onClick={dequeue} isLoader={deleteLoading}
-                            disabled={queue.getLength() === 0 || disableButtons}/>
+                            disabled={queue.getLength() === 0 || disableButtons} id={'buttonDelete'}/>
                     <Button text="Очистить" extraClass={'ml-30'} onClick={clear}
-                            disabled={disableButtons || queue.getLength() === 0}/>
+                            disabled={disableButtons || queue.getLength() === 0} id={'buttonClear'}/>
                 </form>
-                <div className={queueStyle.resultBox}>
+                <div className={queueStyle.resultBox} id={'res'}>
                     {queueArray.map((item, idx) =>
                         <Circle letter={item.value} state={item.state} index={idx} head={item.head ? 'head' : ''}
                                 tail={item.tail ? 'tail' : ''} key={idx}/>)}

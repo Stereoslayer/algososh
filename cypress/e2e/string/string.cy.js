@@ -1,4 +1,5 @@
 import {button, circle, input} from "../constants/elements";
+import {changingStyle, defaultStyle, modifiedStyle} from "../constants/styles";
 
 
 describe('String page test', () => {
@@ -25,35 +26,28 @@ describe('String page test', () => {
         cy.get('@input').type('some');
         cy.get('@button').click();
 
-        cy.get(circle).first().as('first');
+        cy.get(circle).eq(0).as('first');
         cy.get(circle).eq(1).as('second');
         cy.get(circle).eq(2).as('third');
         cy.get(circle).eq(3).as('fourth');
 
-        cy.get('@first', {timeout: 100}).should('have.text', 's').and('contains', /circle_default/);
-        cy.get('@second', {timeout: 100}).should('have.text', 'o').and('contains', /circle_default/);
-        cy.get('@third', {timeout: 100}).should('have.text', 'm').and('contains', /circle_default/);
-        cy.get('@fourth', {timeout: 100}).should('have.text', 'e').and('contains', /circle_default/);
+        cy.get('@first', {timeout: 100}).should('have.text', 's').and('have.css', 'border', defaultStyle);
+        cy.get('@second', {timeout: 100}).should('have.text', 'o').and('have.css', 'border', defaultStyle);
+        cy.get('@third', {timeout: 100}).should('have.text', 'm').and('have.css', 'border', defaultStyle);
+        cy.get('@fourth', {timeout: 100}).should('have.text', 'e').and('have.css', 'border', defaultStyle);
 
         cy.wait(1000);
 
-        cy.get('@first').should('have.text', 'e').and('contains', /circle_changing/);
-        cy.get('@second').should('have.text', 'o').and('contains', /circle_default/);
-        cy.get('@third').should('have.text', 'm').and('contains', /circle_default/);
-        cy.get('@fourth').should('have.text', 's').and('contains', /circle_changing/);
+        cy.get('@first').should('have.text', 'e').and('have.css', 'border', modifiedStyle);
+        cy.get('@second').should('have.text', 'o').and('have.css', 'border', changingStyle);
+        cy.get('@third').should('have.text', 'm').and('have.css', 'border', changingStyle);
+        cy.get('@fourth').should('have.text', 's').and('have.css', 'border', modifiedStyle);
 
         cy.wait(1000);
 
-        cy.get('@first').should('have.text', 'e').and('contains', /circle_modified/);
-        cy.get('@second').should('have.text', 'm').and('contains', /circle_changing/);
-        cy.get('@third').should('have.text', 'o').and('contains', /circle_changing/);
-        cy.get('@fourth').should('have.text', 's').and('contains', /circle_modified/);
-
-        cy.wait(1000);
-
-        cy.get('@first').should('have.text', 'e').and('contains', /circle_modified/);
-        cy.get('@second').should('have.text', 'm').and('contains', /circle_modified/);
-        cy.get('@third').should('have.text', 'o').and('contains', /circle_modified/);
-        cy.get('@fourth').should('have.text', 's').and('contains', /circle_modified/);
+        cy.get('@first').should('have.text', 'e').and('have.css', 'border', modifiedStyle);
+        cy.get('@second').should('have.text', 'm').and('have.css', 'border', modifiedStyle);
+        cy.get('@third').should('have.text', 'o').and('have.css', 'border', modifiedStyle);
+        cy.get('@fourth').should('have.text', 's').and('have.css', 'border', modifiedStyle);
     })
 })

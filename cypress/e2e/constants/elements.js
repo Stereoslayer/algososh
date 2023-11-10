@@ -1,3 +1,19 @@
 export const input = '[id=input]';
+export const inputIndex = '[id=inputIndex]';
 export const button = '[id=button]';
-export const circle = '[class*=circle_circle]'
+export const addHeadButton = '[id=addHead]';
+export const addTailButton = '[id=addTail]';
+export const deleteHeadButton = '[id=deleteHead]';
+export const deleteTailButton = '[id=deleteTail]';
+export const addByIndexButton = '[id=addByIndex]';
+export const deleteByIndexButton = '[id=deleteByIndex]';
+export const circle = '[class*=circle_circle]';
+export const circleIndex = '[data-testid=index]';
+export const circleColoured = '[data-testid=colouredCircle]';
+export const circleSmall = '[data-testid=isSmall]';
+
+export const deleteButton = '[id=buttonDelete]';
+export const clearButton = '[id=buttonClear]';
+export const circleContent = '[class*=circle_content]';
+export const result = '[id=res]';
+export const changingCircle = '[class*=circle_changing]'

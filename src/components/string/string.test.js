@@ -87,6 +87,6 @@ describe('String test', () => {
         fireEvent.change(input, {target: {value: emptyString}});
         fireEvent.click(button);
         expect(screen.getByTestId('button')).toBeDisabled();
-        expect(screen.getByTestId('res')).toBeEmpty();
+        expect(screen.getByTestId('res')).toBeEmptyDOMElement();
     })
 })
