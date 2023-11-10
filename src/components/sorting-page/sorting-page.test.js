@@ -5,8 +5,8 @@ import {BrowserRouter} from "react-router-dom";
 const emptyArray = [];
 const oneElementArray = [{idx: 1}];
 const fourElementsArray = [{idx: 2}, {idx: 0}, {idx: 3}, {idx: 1}];
-describe('Sorting test', () => {
-    it('bubble sort desc empty array test', async () => {
+describe('Test Sorting algorithms', () => {
+    it('bubble sort desc with empty array is correct', async () => {
         render(<SortingPage initValue={emptyArray}/>, {wrapper: BrowserRouter});
         const descButton = screen.getByText('По убыванию');
         const bubbleWay = screen.getByLabelText('Пузырёк');
@@ -16,7 +16,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('res')).toBeEmptyDOMElement();
         }, {timeout: 1000})
     })
-    it('bubble sort asc empty array test', async () => {
+    it('bubble sort asc with empty array is correct', async () => {
         render(<SortingPage initValue={emptyArray}/>, {wrapper: BrowserRouter});
         const ascButton = screen.getByText('По возрастанию');
         const bubbleWay = screen.getByLabelText('Пузырёк');
@@ -26,7 +26,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('res')).toBeEmptyDOMElement();
         }, {timeout: 1000})
     })
-    it('selection sort desc empty array test', async () => {
+    it('selection sort desc with empty array is correct', async () => {
         render(<SortingPage initValue={emptyArray}/>, {wrapper: BrowserRouter});
         const descButton = screen.getByText('По убыванию');
         const selectionWay = screen.getByLabelText('Выбор');
@@ -36,7 +36,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('res')).toBeEmptyDOMElement();
         }, {timeout: 1000})
     })
-    it('selection sort asc empty array test', async () => {
+    it('selection sort asc with empty array is correct', async () => {
         render(<SortingPage initValue={emptyArray}/>, {wrapper: BrowserRouter});
         const ascButton = screen.getByText('По возрастанию');
         const selectionWay = screen.getByLabelText('Выбор');
@@ -46,7 +46,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('res')).toBeEmptyDOMElement();
         }, {timeout: 1000})
     })
-    it('bubble sort desc one element array test', async () => {
+    it('bubble sort desc with one element array is correct', async () => {
         render(<SortingPage initValue={oneElementArray}/>, {wrapper: BrowserRouter})
         const descButton = screen.getByText('По убыванию');
         const bubbleWay = screen.getByLabelText('Пузырёк');
@@ -59,7 +59,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('column')).toHaveClass('modified');
         }, {timeout: 1000})
     })
-    it('bubble sort asc one element array test', async () => {
+    it('bubble sort asc with one element array is correct', async () => {
         render(<SortingPage initValue={oneElementArray}/>, {wrapper: BrowserRouter})
         const ascButton = screen.getByText('По возрастанию');
         const bubbleWay = screen.getByLabelText('Пузырёк');
@@ -72,7 +72,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('column')).toHaveClass('modified');
         }, {timeout: 1000})
     })
-    it('selection sort desc one element array test', async () => {
+    it('selection sort desc with one element array is correct', async () => {
         render(<SortingPage initValue={oneElementArray}/>, {wrapper: BrowserRouter})
         const descButton = screen.getByText('По убыванию');
         const selectionWay = screen.getByLabelText('Выбор');
@@ -85,7 +85,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('column')).toHaveClass('modified');
         }, {timeout: 1000})
     })
-    it('selection sort asc one element array test', async () => {
+    it('selection sort asc with one element array is correct', async () => {
         render(<SortingPage initValue={oneElementArray}/>, {wrapper: BrowserRouter})
         const ascButton = screen.getByText('По возрастанию');
         const selectionWay = screen.getByLabelText('Выбор');
@@ -98,7 +98,7 @@ describe('Sorting test', () => {
             expect(screen.getByTestId('column')).toHaveClass('modified');
         }, {timeout: 1000})
     })
-    it('bubble sort desc several elements array test', async () => {
+    it('bubble sort desc with several elements array is correct', async () => {
         render(<SortingPage initValue={fourElementsArray}/>, {wrapper: BrowserRouter})
         const descButton = screen.getByText('По убыванию');
         const bubbleWay = screen.getByLabelText('Пузырёк');
@@ -129,7 +129,7 @@ describe('Sorting test', () => {
             expect(screen.getAllByTestId('column')[3]).toHaveClass('modified');
         }, {timeout: 5000})
     })
-    it('bubble sort asc several elements array test', async () => {
+    it('bubble sort asc with several elements array is correct', async () => {
         render(<SortingPage initValue={fourElementsArray}/>, {wrapper: BrowserRouter})
         const ascButton = screen.getByText('По возрастанию');
         const bubbleWay = screen.getByLabelText('Пузырёк');
@@ -160,7 +160,7 @@ describe('Sorting test', () => {
             expect(screen.getAllByTestId('column')[3]).toHaveClass('modified');
         }, {timeout: 5000})
     })
-    it('selection sort desc several elements array test', async () => {
+    it('selection sort desc with several elements array is correct', async () => {
         render(<SortingPage initValue={fourElementsArray}/>, {wrapper: BrowserRouter})
         const descButton = screen.getByText('По убыванию');
         const selectionWay = screen.getByLabelText('Выбор');
@@ -191,7 +191,7 @@ describe('Sorting test', () => {
             expect(screen.getAllByTestId('column')[3]).toHaveClass('modified');
         }, {timeout: 5000})
     })
-    it('selection sort asc several elements array test', async () => {
+    it('selection sort asc with several elements array is correct', async () => {
         render(<SortingPage initValue={fourElementsArray}/>, {wrapper: BrowserRouter})
         const ascButton = screen.getByText('По возрастанию');
         const selectionWay = screen.getByLabelText('Выбор');

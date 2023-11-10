@@ -4,12 +4,12 @@ import {render, screen, within} from "@testing-library/react";
 import {ElementStates} from "../../../types/element-states";
 
 
-describe('Circle test', () => {
+describe('Circle component test', () => {
     it('Circle without letter test', () => {
         const circle = renderer.create(<Circle/>).toJSON();
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with letter test', () => {
+    it('Circle with letter is rendered correctly', () => {
         const props = {
             letter: '0'
         };
@@ -18,7 +18,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('circle')).toHaveTextContent('0');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with head test', () => {
+    it('Circle with head is rendered correctly', () => {
         const props = {
             head: 'someValue'
         };
@@ -27,7 +27,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('head')).toHaveTextContent('someValue');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with react-element in head test', () => {
+    it('Circle with react-element in head is rendered correctly', () => {
         const props = {
             head: <Circle isSmall={true}/>
         };
@@ -36,7 +36,7 @@ describe('Circle test', () => {
         within(screen.getByTestId('circle')).getByTestId('circleSmall');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with tail test', () => {
+    it('Circle with tail is rendered correctly', () => {
         const props = {
             tail: 'someValue'
         };
@@ -45,7 +45,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('tail')).toHaveTextContent('someValue');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with react-element in tail test', () => {
+    it('Circle with react-component in tail is rendered correctly', () => {
         const props = {
             tail: <Circle isSmall={true}/>
         };
@@ -54,7 +54,7 @@ describe('Circle test', () => {
         within(screen.getByTestId('circle')).getByTestId('circleSmall');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with index test', () => {
+    it('Circle with index is rendered correctly', () => {
         const props = {
             index: 'someValue'
         };
@@ -63,7 +63,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('index')).toHaveTextContent('someValue');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle with prop isSmall test', () => {
+    it('Circle with prop isSmall is rendered correctly', () => {
         const props = {
             isSmall: true
         };
@@ -72,7 +72,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('isSmall')).toBeTruthy();
         expect(circle).toMatchSnapshot();
     })
-    it('Circle default color test', () => {
+    it('default color Circle is rendered correctly', () => {
         const props = {
             state: ElementStates.Default
         };
@@ -81,7 +81,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('colouredCircle')).toHaveClass('default');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle default color test', () => {
+    it('changing color Circle is rendered correctly', () => {
         const props = {
             state: ElementStates.Changing
         };
@@ -90,7 +90,7 @@ describe('Circle test', () => {
         expect(screen.getByTestId('colouredCircle')).toHaveClass('changing');
         expect(circle).toMatchSnapshot();
     })
-    it('Circle default color test', () => {
+    it('modified color Circle is rendered correctly', () => {
         const props = {
             state: ElementStates.Modified
         };

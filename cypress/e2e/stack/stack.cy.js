@@ -11,11 +11,11 @@ import {
 import {changingStyle, defaultStyle} from "../constants/styles";
 
 
-describe('Stack test', () => {
+describe('Stack algorithm test', () => {
     beforeEach(() => {
         cy.visit('stack');
     })
-    it('button test', () => {
+    it('button should be disabled if input is empty and active if it is not', () => {
         cy.get(input).as('input');
         cy.get('@input').should('have.value', '');
 
@@ -29,7 +29,7 @@ describe('Stack test', () => {
         cy.get('@addButton').should('be.disabled');
     })
 
-    it('add and delete test', () => {
+    it('adding and deleting elements to stack should work correctly', () => {
         cy.get(input).as('input');
         cy.get('@input').type('1');
 
@@ -87,7 +87,7 @@ describe('Stack test', () => {
         cy.get('@secondIndex').should('have.text', '1');
     })
 
-    it('clear test', () => {
+    it('clearing stack should work correctly', () => {
         cy.get(input).as('input');
         cy.get(button).as('addButton');
         cy.get(clearButton).as('clearButton');

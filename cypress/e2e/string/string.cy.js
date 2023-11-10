@@ -2,11 +2,11 @@ import {button, circle, input} from "../constants/elements";
 import {changingStyle, defaultStyle, modifiedStyle} from "../constants/styles";
 
 
-describe('String page test', () => {
+describe('String algorithm test', () => {
     beforeEach(() => {
         cy.visit('recursion');
     })
-    it('button test', () => {
+    it('button should be disabled if input is empty and active if it is not', () => {
         cy.get(input).as('input');
         cy.get('@input').should('have.value', '');
 
@@ -19,7 +19,7 @@ describe('String page test', () => {
         cy.get('@input').type('{backspace}{backspace}{backspace}{backspace}');
         cy.get('@button').should('be.disabled');
     })
-    it('reverse string test', () => {
+    it('reverse of string should work correctly', () => {
         cy.get(input).as('input');
         cy.get(button).as('button');
 

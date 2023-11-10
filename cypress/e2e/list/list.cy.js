@@ -11,12 +11,12 @@ import {
 import {changingStyle, defaultStyle, modifiedStyle} from "../constants/styles";
 
 
-describe('List test', () => {
+describe('Linked list algorithm test', () => {
     beforeEach(() => {
         cy.visit('list');
     })
 
-    it('buttons test', () => {
+    it('buttons should be disabled if input is empty and active if it is not', () => {
         cy.get(input).as('inputValue');
         cy.get(inputIndex).as('inputIndex');
         cy.get(addHeadButton).as('addHeadButton');
@@ -76,7 +76,7 @@ describe('List test', () => {
         cy.get('@deleteByIndexButton').should('not.be.disabled');
     })
 
-    it('default list render test', () => {
+    it('default list should rendered correctly', () => {
         cy.get(circle).its('length').should('be.greaterThan', 1).and('be.lessThan', 7);
         cy.get(circleContent).first().children().contains('head');
         cy.get(circleContent).last().children().contains('tail');
@@ -85,7 +85,7 @@ describe('List test', () => {
         });
     })
 
-    it('add to head test', () => {
+    it('adding element to head should be correct', () => {
         cy.get(input).type('2');
         cy.get(addHeadButton).click();
 
@@ -97,7 +97,7 @@ describe('List test', () => {
         cy.get(circleContent).first().children().contains('head');
     })
 
-    it('add to tail test', () => {
+    it('adding element to tail should be correct', () => {
         cy.get(input).type('2');
         cy.get(addTailButton).click();
 
@@ -109,7 +109,7 @@ describe('List test', () => {
         cy.get(circleContent).last().children().contains('tail');
     })
 
-    it('delete from head test', () => {
+    it('deleting element from head should be correct', () => {
         cy.get(circle).each(($el, idx) => {
             if ([0].includes(idx)) {
                 const circleValue = $el[0].textContent;
@@ -121,7 +121,7 @@ describe('List test', () => {
         cy.get(changingCircle).should('not.exist');
     })
 
-    it('delete from tail test', () => {
+    it('deleting element from tail should be correct', () => {
         cy.get(circle).each(($el, idx, $arr) => {
             if ([$arr.length - 1].includes(idx)) {
                 const circleValue = $arr[$arr.length - 1].textContent;
@@ -133,7 +133,7 @@ describe('List test', () => {
         cy.get(changingCircle).should('not.exist');
     })
 
-    it('add by index test', () => {
+    it('adding element by index should be correct', () => {
         cy.get(input).type('2');
         cy.get(inputIndex).type('1');
 
@@ -148,7 +148,7 @@ describe('List test', () => {
         cy.get(circle).eq(1).should('have.css', 'border', defaultStyle);
     })
 
-    it('delete by index test', () => {
+    it('deleting element by index should be correct', () => {
         cy.get(inputIndex).type('1');
 
         cy.get(deleteByIndexButton).click();

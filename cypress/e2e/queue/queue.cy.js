@@ -10,12 +10,12 @@ import {
 import {changingStyle, defaultStyle} from "../constants/styles";
 
 
-describe('Queue test', () => {
+describe('Queue algorithm test', () => {
     beforeEach(() => {
         cy.visit('queue');
     });
 
-    it('button test', () => {
+    it('button should be disabled if input is empty and active if it is not', () => {
         cy.get(input).as('input');
         cy.get('@input').should('have.value', '');
 
@@ -29,7 +29,7 @@ describe('Queue test', () => {
         cy.get('@addButton').should('be.disabled');
     })
 
-    it('add and delete test', () => {
+    it('adding and deleting elements to queue should work correctly', () => {
         cy.get(input).as('input');
         cy.get(button).as('addButton');
         cy.get(deleteButton).as('deleteButton');
@@ -102,7 +102,7 @@ describe('Queue test', () => {
         cy.get('@thirdContent').children().contains('tail');
     })
 
-    it('clear test', () => {
+    it('clearing queue should work correctly', () => {
         cy.get(input).as('input');
         cy.get(button).as('addButton');
         cy.get(clearButton).as('clearButton');

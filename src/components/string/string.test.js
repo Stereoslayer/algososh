@@ -7,8 +7,8 @@ const evenString = 'even';
 const oddString = 'odd';
 const oneElementString = '1';
 const emptyString = '';
-describe('String test', () => {
-    it('even number of letters test', async () => {
+describe('Test String algorithm', () => {
+    it('String algorithm with even number of letters is correct', async () => {
         render(<StringComponent/>, {wrapper: BrowserRouter});
         const input = screen.getByTestId('input');
         const button = screen.getByText('Развернуть');
@@ -39,7 +39,7 @@ describe('String test', () => {
             expect(screen.getAllByTestId('colouredCircle')[3]).toHaveClass('modified');
         }, {timeout: 3000})
     })
-    it('odd number of letters test', async () => {
+    it('String algorithm with odd number of letters is correct', async () => {
         render(<StringComponent/>, {wrapper: BrowserRouter});
         const input = screen.getByTestId('input');
         const button = screen.getByText('Развернуть');
@@ -65,7 +65,7 @@ describe('String test', () => {
             expect(screen.getAllByTestId('colouredCircle')[2]).toHaveClass('modified');
         }, {timeout: 3000})
     })
-    it('one letter test', async () => {
+    it('String algorithm with one letter is correct', async () => {
         render(<StringComponent/>, {wrapper: BrowserRouter});
         const input = screen.getByTestId('input');
         const button = screen.getByText('Развернуть');
@@ -79,7 +79,7 @@ describe('String test', () => {
             expect(screen.getAllByTestId('colouredCircle')[0]).toHaveClass('modified');
         }, {timeout: 3000})
     })
-    it('empty string test', () => {
+    it('String algorithm with empty array is correct', () => {
         render(<StringComponent/>, {wrapper: BrowserRouter});
         const input = screen.getByTestId('input');
         const button = screen.getByText('Развернуть');

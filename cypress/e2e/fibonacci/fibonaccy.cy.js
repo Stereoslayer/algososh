@@ -1,12 +1,12 @@
 import {button, circle, circleIndex, input} from "../constants/elements";
 import {defaultStyle} from "../constants/styles";
 
-describe('Fibonacci test', () => {
+describe('Test Fibonacci algorithm', () => {
     beforeEach(() => {
         cy.visit('fibonacci');
     })
 
-    it('button test', () => {
+    it('button should be disabled if input is empty and active if it is not', () => {
         cy.get(input).as('input');
         cy.get('@input').should('have.value', '');
 
@@ -20,7 +20,7 @@ describe('Fibonacci test', () => {
         cy.get('@button').should('be.disabled');
     })
 
-    it('sequence test', () => {
+    it('sequence should be correct', () => {
         cy.get(input).as('input');
         cy.get(button).as('button');
 
