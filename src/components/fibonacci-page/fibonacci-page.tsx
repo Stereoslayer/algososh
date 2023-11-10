@@ -44,10 +44,10 @@ export const FibonacciPage: React.FC = () => {
             <div className={fibonacciStyle.mainBox}>
                 <form className={fibonacciStyle.form} onSubmit={e => onSubmitHandler(e)}>
                     <Input type={'number'} isLimitText={true} max={maxNumber} onChange={onChangeHandler}
-                           disabled={loading} value={value}/>
+                           disabled={loading} value={value} id={'input'}/>
                     <Button text={'Рассчитать'} type={'submit'}
                             disabled={value === undefined || Number(value) > maxNumber || Number(value) < 1}
-                            isLoader={loading}/>
+                            isLoader={loading} id={'button'}/>
                 </form>
                 <div className={fibonacciStyle.resultBox}>
                     {fibonacciSequence.length !== 0 ? fibonacciSequence.map((item, idx) =>

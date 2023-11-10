@@ -7,3 +7,4 @@ const getRandomInt = (min: number, max: number): number => {
 export const generateRandomArray = (maxLength: number, minLength: number, maxValue: number): Array<number> => (
     [...new Array(getRandomInt(minLength, maxLength))].map(() => Math.round(Math.random() * maxValue))
 );
+

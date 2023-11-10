@@ -33,6 +33,9 @@ const getInitArr = (): IListArrayItem[] => {
         }
     })
 }
+type TListPageProps = {
+    initArr?: IListArrayItem[];
+};
 
 export const ListPage: React.FC = () => {
     const [linkedListArray, setLinkedListArray] = useState<Array<IListArrayItem>>([]);
@@ -50,6 +53,7 @@ export const ListPage: React.FC = () => {
     useEffect(() => {
         setLinkedListArray([...linkedList.toArray()])
     }, [linkedList])
+
 
     const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -274,25 +278,26 @@ export const ListPage: React.FC = () => {
                 <form className={listStyle.form}>
                     <Input extraClass={listStyle.input} type="text" isLimitText={true} placeholder="Введите значение"
                            maxLength={maxInputLength} onChange={onChangeInputValue} value={inputValue}
-                           disabled={loading}/>
+                           disabled={loading} id={'input'}/>
                     <Button text="Добавить в head" linkedList="small" onClick={headAdd} isLoader={addHeadLoading}
-                            disabled={buttonsDisable}/>
+                            disabled={buttonsDisable} id={'addHead'}/>
                     <Button text="Добавить в tail" linkedList="small"
                             onClick={addTail} isLoader={addTailLoading}
-                            disabled={buttonsDisable}/>
+                            disabled={buttonsDisable} id={'addTail'}/>
                     <Button text="Удалить из head" linkedList="small" onClick={headDelete}
-                            isLoader={deleteHeadLoading} disabled={loading || linkedListArray.length === 0}/>
+                            isLoader={deleteHeadLoading} disabled={loading || linkedListArray.length === 0}
+                            id={'deleteHead'}/>
                     <Button text="Удалить из tail" linkedList="small" disabled={loading || linkedListArray.length === 0}
                             isLoader={deleteTailLoading}
-                            onClick={tailDelete}/>
+                            onClick={tailDelete} id={'deleteTail'}/>
                     <Input extraClass={listStyle.input} type="number" placeholder="Введите индекс"
-                           onChange={onChangeInputIndex} value={indexValue}/>
+                           onChange={onChangeInputIndex} value={indexValue} id={'inputIndex'}/>
                     <Button text="Добавить по индексу" linkedList="big" onClick={addBuIndex}
                             isLoader={addByIndexLoading}
-                            disabled={indexButtonsDisable || inputValue === '' || indexValue === ''}/>
+                            disabled={indexButtonsDisable || inputValue === '' || indexValue === ''} id={'addByIndex'}/>
                     <Button text="Удалить по индексу" linkedList="big" isLoader={deleteByIndexLoading}
                             onClick={deleteByIndex}
-                            disabled={indexButtonsDisable || indexValue === ''}/>
+                            disabled={indexButtonsDisable || indexValue === ''} id={'deleteByIndex'}/>
                 </form>
                 <div className={listStyle.resultBox}>
                     {linkedListArray.map((item, idx) =>

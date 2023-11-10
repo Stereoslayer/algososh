@@ -24,12 +24,13 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className={`${styles.content} ${extraClass}`}>
       <input
-        className={`${styles.input} text text_type_input text_color_input`}
-        placeholder={placeholder}
-        type={type}
-        maxLength={maxLength}
-        max={max}
-        {...rest}
+          className={`${styles.input} text text_type_input text_color_input`}
+          placeholder={placeholder}
+          type={type}
+          maxLength={maxLength}
+          max={max}
+          {...rest}
+          data-testid={'input'}
       />
       {isLimitText && (
         <span
